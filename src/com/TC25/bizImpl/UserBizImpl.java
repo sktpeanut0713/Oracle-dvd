@@ -24,8 +24,7 @@ public class UserBizImpl implements UserBiz {
 	
 		if (userAccount == null || userPwd == null || userAccount.length() == 0 || userPwd.length() == 0) {
 			return false;
-		}
-		
+		}		
 		UserDao ud = new UserDaoImpl();
 		User u = null;
 		try {
@@ -36,11 +35,9 @@ public class UserBizImpl implements UserBiz {
 		}
 		if (u == null) {
 			return false;
-		}
-		
+		}		
 		//--开始验证密码
-		System.out.println(u);
-		
+		System.out.println(u);		
 		return false;
 	}
 
@@ -49,8 +46,23 @@ public class UserBizImpl implements UserBiz {
 	 */
 	@Override
 	public void userRegister() {
-		// TODO Auto-generated method stub
+		
 		
 	}
+	
+	/**
+	 * 检查用户输入用户名是否在数据库中已经存在
+	 * @return 
+	 * @throws SQLException 
+	 */
+	@Override
+	public boolean checkUserAccount(String account) throws SQLException {
+		UserDao ud = new UserDaoImpl();
+		boolean a =false;
+		a = ud.isAccountExist(account);
+		return a;		
+	}
 
+	
+	
 }

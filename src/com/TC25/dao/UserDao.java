@@ -15,6 +15,8 @@ public interface UserDao {
 	 * @throws SQLException 
 	 */
 	public User getUserByUserAccount(String userAccount) throws SQLException;
+	
+	public boolean isAccountExist(String account) throws SQLException;
 }
 
 

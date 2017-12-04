@@ -1,6 +1,7 @@
-package com.TC25.daoImpl;
+ package com.TC25.daoImpl;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,7 +63,27 @@ public class UserDaoImpl implements UserDao {
 		}		
 		return u;
 	}
-
+	/**
+	 * 判断账号是否已经在数据库中存在
+	 */
+	public boolean isAccountExist(String account) throws SQLException{
+		DBHelper db = new DBHelper();
+		Connection conn = db.getConnection();
+		PreparedStatement pStment = conn.prepareStatement("select * from DVD_USER");
+		ResultSet rSet = pStment.executeQuery();
+		
+		boolean b = false;
+		pStment.executeUpdate();//--增删改.
+		while (rSet.next()) {
+			if(account.equals(rSet.getString("USERACCOUNT"))){
+				b = true;
+			}			
+		}						
+		return b;		
+	}
+	
+	
+	
 }
 
 

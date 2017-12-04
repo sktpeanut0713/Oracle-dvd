@@ -1,5 +1,7 @@
 package com.TC25.biz;
 
+import java.sql.SQLException;
+
 public interface UserBiz {
 	
 	/**
@@ -12,5 +14,5 @@ public interface UserBiz {
 	
 	public void userRegister();
 
-	public void checkUserAccount(String account);
+	public boolean checkUserAccount(String account) throws SQLException;
 }

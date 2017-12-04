@@ -1,5 +1,7 @@
+
 package com.TC25.view;
 
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,16 +20,27 @@ public class RegisterView extends View {
 		System.out.println("用户注册界面");
 		
 		RegisterView rsv = new RegisterView();
-		String account = rsv.gainAccount();
+		String account = rsv.checkUserAccount();
 		
 		UserBiz ub = new UserBizImpl();
-		//ub.checkUserAccount(account);
+		boolean a = false;
+		try {
+			a = ub.checkUserAccount(account);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-
+		while(true){
+			if(a==true){
+				System.out.println("账号已被注册,请重新输入!");
+			}
+		}
+		
 		return null;
 	}
 
-	public String gainAccount() {		
+	public String checkUserAccount() {		
 		String account = "";
 		Pattern p = Pattern.compile("[A-Z]{1}[a-zA-Z0-9_.]{1,16}");
 		Matcher m = null;
