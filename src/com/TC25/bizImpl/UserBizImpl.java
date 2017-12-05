@@ -63,6 +63,15 @@ public class UserBizImpl implements UserBiz {
 		return a;		
 	}
 
+	@Override
+	public boolean transFormUser(String account, String pwd, String userPwdTip, String userName) throws SQLException {
+		Boolean a = false;
+		UserDao ud = new UserDaoImpl();
+		a = ud.enterUser(account,pwd,userPwdTip,userName);
+		return a ;
+	}
+
+	
 	
 	
 }

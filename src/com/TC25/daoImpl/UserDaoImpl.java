@@ -63,6 +63,7 @@ public class UserDaoImpl implements UserDao {
 		}		
 		return u;
 	}
+	
 	/**
 	 * 判断账号是否已经在数据库中存在
 	 */
@@ -73,14 +74,43 @@ public class UserDaoImpl implements UserDao {
 		ResultSet rSet = pStment.executeQuery();
 		
 		boolean b = false;
-		pStment.executeUpdate();//--增删改.
+		//pStment.executeUpdate();//--增删改.
 		while (rSet.next()) {
 			if(account.equals(rSet.getString("USERACCOUNT"))){
 				b = true;
+				break;
 			}			
 		}						
 		return b;		
 	}
+
+	/**
+	 * 把注册的用户录入数据库
+	 * @throws SQLException 
+	 */
+	@Override
+	public boolean enterUser(String account, String pwd, String userPwdTip, String userName) throws SQLException {		
+		DBHelper db = new DBHelper();		
+		
+		String sql = "insert into DVD_USER(USERID,USERACCOUNT,USERPWD,USERPWDTIPS,USERNAME) values(dvduserid_seq.nextval,?,?,?,?)";
+		
+		Connection conn = db.getConnection();
+		
+		PreparedStatement pStment = conn.prepareStatement(sql);
+		
+		pStment.setString(1, account);
+		pStment.setString(2, pwd);
+		pStment.setString(3, userPwdTip);
+		pStment.setString(4, userName);
+		
+		pStment.executeUpdate();
+		//pStment.executeUpdate();//--增删改.
+		
+		return true;
+		
+	}
+
+
 	
 	
 	
