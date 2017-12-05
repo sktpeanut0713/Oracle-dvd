@@ -32,6 +32,7 @@ public class MainView extends View {
 		System.out.println("1.µÇÂ¼");
 		System.out.println("2.×¢²á");
 		System.out.println("3.ÍË³ö");
+		System.out.println("4.²é¿´DVD");
 
 		int a = 0;
 		while (true) {
@@ -52,6 +53,9 @@ public class MainView extends View {
 			break;
 		case 3:
 			System.exit(0);
+			break;
+		case 4:
+			mView = new SearchView();
 			break;
 		default:
 			break;
