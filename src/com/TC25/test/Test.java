@@ -7,6 +7,7 @@ import com.TC25.view.View;
 
 public class Test {
 
+	private View mView;
 	/* 页面(View) 调用 业务(Biz)
 	 * 
 	 * 业务(Biz)  调用 数据操作类(Dao)
@@ -17,15 +18,17 @@ public class Test {
 	public static void main(String[] args) {
 		
 		View view = new MainView();
-		
+
 		while(view!=null) {
 			view = view.showView();		
 		}
-		System.out.println("欢迎下次光临");
+		//System.out.println("欢迎下次光临");
 		
 		/*View view  = new LoginView();
 		view.showView();*/
 	}
+	
+	
 }
 
 

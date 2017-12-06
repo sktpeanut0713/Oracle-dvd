@@ -31,20 +31,19 @@ public class MainView extends View {
 		System.out.println();
 		System.out.println("1.登录");
 		System.out.println("2.注册");
-		System.out.println("3.退出");
-		System.out.println("4.查看DVD");
+		System.out.println("4.退出");
 
 		int a = 0;
 		while (true) {
 			System.out.println("请选择执行项");
 			a = input.getInt();
-			if (a >= 1 || a <= 3) {
+			if (a >= 1 || a <= 4) {
 				break;
 			} else {
 				System.out.println("输入错误，没有此选项请重新输入!");
 			}
 		}
-		switch (a) {
+		switch (a) {	
 		case 1:
 			mView = new LoginView();
 			break;
@@ -53,9 +52,6 @@ public class MainView extends View {
 			break;
 		case 3:
 			System.exit(0);
-			break;
-		case 4:
-			mView = new SearchView();
 			break;
 		default:
 			break;

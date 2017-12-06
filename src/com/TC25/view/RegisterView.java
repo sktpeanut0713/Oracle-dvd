@@ -18,10 +18,9 @@ public class RegisterView extends View {
 	public View showView() {
 		UserBiz ub = new UserBizImpl();
 		RegisterView rsv = new RegisterView();
-		
-		
-		System.out.println(">>><<<欢迎来到用户注册界面>>><<<");
-		// 得到用户账号
+						
+		System.out.println("<<<<<<欢迎来到用户注册界面>>>>>>");
+		// 判断用户所输入的账号在数据库是否存在,存在则重新输入,不存在则得到此账号
 		String account = rsv.checkUserInputAccount();
 		// 得到用户密码
 		String pwd = rsv.gainPassWord();
@@ -59,7 +58,7 @@ public class RegisterView extends View {
 	/**
 	 * @Title: checkUserInputAccount
 	 * @Description: 判断用户所输入的账号是否在数据库中已经存在
-	 * @return Boolean 返回类型
+	 * @return String 用户账户
 	 */
 	public String checkUserInputAccount() {
 		String account = "";
@@ -77,6 +76,7 @@ public class RegisterView extends View {
 				break;
 			}
 		}
+		
 		UserBiz ub = new UserBizImpl();
 		try {
 			while (true == ub.checkUserAccount(account)) {

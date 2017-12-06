@@ -5,10 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import com.TC25.bean.DVD;
 import com.TC25.bean.User;
 import com.TC25.dao.UserDao;
 import com.TC25.tools.DBHelper;
+
 /**
  * @Title: UserDaoImpl.java
  * @package: com.TC25.daoImpl
@@ -19,11 +22,13 @@ import com.TC25.tools.DBHelper;
  */
 public class UserDaoImpl implements UserDao {
 	
+	private DBHelper mDB;
 	private Connection mConnection;
 	private PreparedStatement mStatement;
 	private ResultSet rSet;
 	
-	private DBHelper mDB;
+	public static User peanut = new User();
+	
 	public UserDaoImpl() {
 		mDB = new DBHelper();
 		mConnection = mDB.getConnection();
@@ -49,18 +54,18 @@ public class UserDaoImpl implements UserDao {
 		 * 如果查的到则结果集中有数据.否则结果集为null
 		 */
 		rSet = mStatement.executeQuery();
-		if (rSet == null) {
-			return null;
-		}
 		User u = new User();
-		while (rSet.next()) {			
+		if (rSet.next()) {
 			u.setUserId(rSet.getInt("USERID"));	
 			u.setUserAccount(rSet.getString("USERACCOUNT"));
 			u.setUserName(rSet.getString("USERNAME"));	
 			u.setUserPwd(rSet.getString("USERPWD"));
 			u.setUserPwdTips(rSet.getString("USERPWDTIPS"));
 			u.setUserStatus(rSet.getInt("USERSTATUS"));
-		}		
+		}else {
+			return null;
+		}
+		peanut = u; //把登录的User账户保存在静态的uTest中
 		return u;
 	}
 	
@@ -106,9 +111,74 @@ public class UserDaoImpl implements UserDao {
 		pStment.executeUpdate();
 		//pStment.executeUpdate();//--增删改.
 		
-		return true;
+		return true;		
+	}
+
+
+	@Override
+	public ArrayList<DVD> showAllDvd() throws SQLException {
+		
+		String sql ="select * from DVD";
+		mStatement = mConnection.prepareStatement(sql);
+		rSet = mStatement.executeQuery();	//查看	
+		
+		ArrayList<DVD> array =new ArrayList<>();		
+		while(rSet.next()) {		
+			DVD d = new DVD();
+			d.setDvdID(rSet.getInt("DVDID"));
+			d.setDvdName(rSet.getString("DVDNAME"));
+			d.setDvdDate(rSet.getDate("DVDDATE"));
+			d.setDvdLendCount(rSet.getInt("DVDLENDCOUNT"));
+			d.setDvdStatus(rSet.getInt("DVDSTATUS"));		
+			array.add(d);
+		}	
+		return array;
+	}
+
+
+	@Override
+	public ArrayList<DVD> showCanLendDvd() {
+		
+		ArrayList<DVD> array =new ArrayList<>();
+		try {
+			String sql = "select * from DVD where DVDSTATUS = 1";
+			mStatement = mConnection.prepareStatement(sql);
+			rSet = mStatement.executeQuery();		
+					
+			while(rSet.next()) {		
+				DVD d = new DVD();
+				d.setDvdID(rSet.getInt("DVDID"));
+				d.setDvdName(rSet.getString("DVDNAME"));
+				d.setDvdDate(rSet.getDate("DVDDATE"));
+				d.setDvdLendCount(rSet.getInt("DVDLENDCOUNT"));
+				d.setDvdStatus(rSet.getInt("DVDSTATUS"));		
+				array.add(d);
+			}				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return array;
+	}
+
+
+	@Override
+	public void LendDvdById(int b) {
+		
+		String sql1 = "update DVD set DVDSTATUS = '2' where DVDID = ?";
+		
+		try {
+			mStatement= mConnection.prepareStatement(sql1);
+		   // rSet = mStatement.executeUpdate();
+			
+		
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
+
 
 
 	

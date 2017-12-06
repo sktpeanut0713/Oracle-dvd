@@ -17,7 +17,7 @@ public class DBHelper {
 	public static final String USER = "liuhao";
 	public static final String PWD = "123456";
 
-	Connection mConnection;
+	private Connection mConnection;
 
 	/**
 	 * 返回和数据库的连接对象.
@@ -35,8 +35,7 @@ public class DBHelper {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-
+		}		
 		return mConnection;
 
 	}
