@@ -26,7 +26,9 @@ public interface UserDao {
 
 	public ArrayList<DVD> showCanLendDvd();
 
-	public void LendDvdById(int b);
+	public boolean checkDvdById(int b);
+
+	public int lendDvdById(int b);
 	
 
 	

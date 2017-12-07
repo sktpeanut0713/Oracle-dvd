@@ -22,7 +22,7 @@ public class LoginView extends View{
 			UserBiz ub = new UserBizImpl();
 			if (ub.userLogin(userAccount, userPwd)) {
 				//--登录成功
-				System.out.println("<<<<<<<<<登陆成功>>>>>>>>>");								
+				System.out.println("<<<<<<<<登陆成功>>>>>>>>");								
 				
 				mView =new SearchView();
 				return mView;

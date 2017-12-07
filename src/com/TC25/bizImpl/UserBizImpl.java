@@ -79,9 +79,15 @@ public class UserBizImpl implements UserBiz {
 	}
 
 	@Override
-	public void LendDvd(int b) {
-		ud.LendDvdById(b);
-		
+	public boolean checkDvdStatus(int b) {
+		boolean a =ud.checkDvdById(b);
+		return a;
+	}
+
+	@Override
+	public int lendDvd(int b) {
+		int a = ud.lendDvdById(b);
+		return a;
 	}
 
 	

@@ -47,7 +47,9 @@ public interface UserBiz {
 
 	public ArrayList<DVD> showCanLendDvd();
 
-	public void LendDvd(int b);
+	public boolean checkDvdStatus(int b);
+
+	public int lendDvd(int b);
 	
 	
 	
