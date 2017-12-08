@@ -46,9 +46,9 @@ public class RegisterView extends View {
 			e.printStackTrace();
 		}
 		
-		if(a==true) {
-		System.out.println("账号注册成功!");
-		}else {
+		if (a == true) {
+			System.out.println("账号注册成功!");
+		} else {
 			System.out.println("账号注册失败");
 		}
 
@@ -108,8 +108,7 @@ public class RegisterView extends View {
 			if (m1.matches()) {
 				break;
 			} else {
-				System.out.println("输入密码类型不符合规范，请重新输入，谢谢！");
-				break;
+				System.out.println("输入密码类型不符合规范,请重新输入,谢谢!");
 			}
 		}
 		while (true) {
@@ -124,7 +123,7 @@ public class RegisterView extends View {
 					System.out.println("第二次密码与第一次不匹配");
 				}
 			} else {
-				System.out.println("第二次输入密码不符合规范");
+				System.out.println("第二次输入密码不符合规范,请重新输入密码,谢谢!");
 			}
 		}
 		return pwd2;

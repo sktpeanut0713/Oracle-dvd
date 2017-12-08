@@ -1,7 +1,9 @@
 package com.TC25.view;
 
+import com.TC25.bean.User;
 import com.TC25.biz.UserBiz;
 import com.TC25.bizImpl.UserBizImpl;
+import com.TC25.daoImpl.UserDaoImpl;
 import com.TC25.tools.InputTools;
 
 public class LendReturnView extends View {
@@ -37,6 +39,10 @@ public class LendReturnView extends View {
 			}else {
 				System.out.println(">>>>>½è³öÊ§°Ü!<<<<<<");
 			}
+			
+			User u = UserDaoImpl.p;
+			
+			
 			mView = new LendReturnView();
 			break;
 		case 2:

@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 	private PreparedStatement mStatement;
 	private ResultSet rSet;
 
-	public static User peanut = new User();
+	public static User p = new User();
 
 	public UserDaoImpl() {
 		mDB = new DBHelper();
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 		} else {
 			return null;
 		}
-		peanut = u; // 把登录的User账户保存在静态的uTest中
+		p = u; // 把登录的User账户保存在静态的p中
 		return u;
 	}
 
@@ -95,6 +95,7 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public boolean enterUser(String account, String pwd, String userPwdTip, String userName) throws SQLException {
+		int a = 0;
 		DBHelper db = new DBHelper();
 
 		String sql = "insert into DVD_USER(USERID,USERACCOUNT,USERPWD,USERPWDTIPS,USERNAME) values(dvduserid_seq.nextval,?,?,?,?)";
@@ -102,16 +103,19 @@ public class UserDaoImpl implements UserDao {
 		Connection conn = db.getConnection();
 
 		PreparedStatement pStment = conn.prepareStatement(sql);
-
+		
+		// pStment.executeUpdate();  --增删改.
 		pStment.setString(1, account);
 		pStment.setString(2, pwd);
 		pStment.setString(3, userPwdTip);
 		pStment.setString(4, userName);
-
-		pStment.executeUpdate();
-		// pStment.executeUpdate();//--增删改.
-
-		return true;
+		a = pStment.executeUpdate();			
+		if(a==1) {
+			return true;	
+		}else {
+			return false;
+		}
+		
 	}
 
 	@Override
